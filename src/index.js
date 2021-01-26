@@ -43,7 +43,12 @@ class Board extends React.Component {
     ); /** Is this how we create props */
   }
 
+  isClicked(i) {
+    return this.state.squares[i] == null ? false : true;
+  }
+
   handleClick(i) {
+    if (this.isClicked(i)) return;
     const squares = this.state.squares.slice();
     squares[i] = this.state.value;
     this.setState({
