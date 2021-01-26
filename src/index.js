@@ -6,13 +6,53 @@ import reportWebVitals from "./reportWebVitals";
 
 class Square extends React.Component {
   render() {
-    return <button className="square">{/* TODO */}</button>;
+    return (
+      <button
+        className="square"
+        onClick={() => this.props.onClick()}
+        // onClick={() => {
+        //   this.props.on_Click();
+        // this.setState({
+        //   value:
+        //     this.state.value === "X"
+        //       ? "O"
+        //       : "X" /** In case I want to switch between the state of the current component */,
+        // });
+        //alert("click " + this.state.value);
+        //this.state.value = this.state.value === "X" ? "O" : "X";
+        // }}
+      >
+        {this.props.value}
+      </button>
+    );
   }
 }
 
 class Board extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { squares: Array(9).fill(null) };
+  }
+
   renderSquare(i) {
-    return <Square />;
+    return (
+      <Square
+        value={this.state.squares[i]}
+        onClick={() => this.handleClick(i)}
+      />
+    ); /** Is this how we create props */
+  }
+
+  handleClick(i) {
+    const squares = this.state.squares.slice();
+    squares[i] = this.state.value;
+    this.setState({
+      value:
+        this.state.value === "X"
+          ? "O"
+          : "X" /** In case I want to switch between the state of the current component */,
+    });
+    this.setState({ squares: squares });
   }
 
   render() {
@@ -58,7 +98,6 @@ class Game extends React.Component {
 }
 
 // ========================================
-
 ReactDOM.render(<Game />, document.getElementById("root"));
 
 // If you want to start measuring performance in your app, pass a function
