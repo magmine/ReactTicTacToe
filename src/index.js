@@ -86,7 +86,8 @@ class Board extends React.Component {
     if (isWin) {
       status = "Winner is " + isWin;
     } else {
-      status = "Next player: " + (this.state.value === "X" ? "O" : "X");
+      let value = this.state.value == null ? "X" : this.state.value;
+      status = "Next player: " + value;
     }
     return (
       <div>
@@ -119,7 +120,9 @@ class Game extends React.Component {
           <Board />
         </div>
         <div className="game-info">
-          <div>{/* status */}</div>
+          <div className="status">
+            <button>btn1</button>
+          </div>
           <ol>{/* TODO */}</ol>
         </div>
       </div>
