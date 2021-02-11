@@ -20,6 +20,13 @@ export function Square(props) {
   );
 }
 
+export function isDraw(squares) {
+  for (let i = 0; i < squares.length; i++) {
+    if (!squares[i]) return false;
+  }
+  return true;
+}
+
 export function calculateWinner(squares) {
   const lines = [
     [0, 1, 2],
