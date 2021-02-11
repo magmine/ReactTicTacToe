@@ -7,8 +7,7 @@ export class Game extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      history: [{ squares: Array(9).fill(null) }],
-      status: "X",
+      history: [{ squares: Array(9).fill(null), nextPlayer: "X" }],
     };
   }
 
@@ -19,14 +18,14 @@ export class Game extends React.Component {
     if (calculateWinner(squares) || squares[i]) {
       return;
     }
-    squares[i] = this.state.status;
+    squares[i] = current.nextPlayer;
     this.setState({
       history: history.concat([
         {
           squares: squares,
+          nextPlayer: current.nextPlayer === "X" ? "O" : "X",
         },
       ]),
-      status: this.state.status === "X" ? "O" : "X",
     });
   }
 
@@ -42,7 +41,7 @@ export class Game extends React.Component {
       if (isDraw(current.squares)) {
         status = "Draw";
       } else {
-        let value = this.state.status == null ? "X" : this.state.status;
+        let value = current.nextPlayer == null ? "X" : current.nextPlayer;
         status = "Next player: " + value;
       }
     }
